@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Merriweather:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400..700&display=swap");
 
 :root {
   --background-color: #f1efe1;
   --paper-color: #f9f7f1;
 
-  --text-color: #2c2c2c;
-  --headline-color: #000;
+  --text-color: #3c2921;
+  --headline-color: #18110d;
   --border-color: #8b8b8b;
   --card-shadow: rgba(0, 0, 0, 0.1);
 }
@@ -17,32 +17,37 @@
 body {
   background-color: var(--background-color);
   color: var(--text-color);
-  font-family: "Merriweather", serif;
+  font-family: "Montserrat", serif;
   line-height: 1.7;
   letter-spacing: 0.02em;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.1) 1px,
+  background-image: radial-gradient(
+      rgba(139, 115, 85, 0.3) 1px,
       transparent 1px
     ),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 20px 20px;
+    radial-gradient(rgba(139, 115, 85, 0.3) 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  min-height: 100vh;
 }
 
 .newspaper-container {
-  background-color: var(--background-color);
-  padding: 30px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .article-stack {
+  flex: 1;
+  width: 100%;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 50px 0;
-  height: 600px;
   overflow: hidden;
   flex-direction: column;
 }
@@ -60,6 +65,7 @@ body {
   cursor: pointer;
   opacity: 0.9;
   scale: 1;
+  color: #5c4033; /* Darker brown for better contrast */
 }
 
 .background-card {
@@ -102,11 +108,12 @@ body {
 }
 
 .article-card-title {
-  font-family: "Libre Baskerville", serif;
+  font-family: "PT Serif", serif;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--headline-color);
   margin-bottom: 10px;
+  line-height: 1.5;
 }
 
 .article-card-byline {
@@ -122,6 +129,7 @@ body {
   line-height: 1.6;
   color: var(--text-color);
   max-height: 200px;
+  text-overflow: ellipsis;
   overflow-y: auto;
 }
 
@@ -133,13 +141,37 @@ body {
   }
 }
 
+.loading-container,
+.error-message,
+.placeholder-message {
+  font-family: "Georgia", serif;
+  font-size: 1.5rem;
+  color: #8b7355; /* A soft brown color */
+  text-align: center;
+  padding: 2rem;
+  max-width: 600px;
+  margin: 4rem auto;
+  line-height: 1.6;
+}
+
+/* Add a subtle animation to loading cards */
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
 .loading-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full viewport height */
-  font-size: 1.5rem; /* Adjust font size as needed */
-  color: #333; /* Loading text color */
+  padding: 0;
 }
 @keyframes spin {
   0% {
@@ -170,4 +202,42 @@ body {
   font-size: 0.9rem; /* Adjust size as needed */
   color: #666; /* Category text color */
   margin: 4px 0; /* Spacing */
+}
+
+.card h2 {
+  font-family: "Georgia", serif;
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  color: #5c4033; /* Same darker brown for titles */
+}
+
+.card p {
+  font-family: "Georgia", serif;
+  line-height: 1.6;
+  color: #5c4033; /* Same darker brown for paragraph text */
+}
+
+.instruction-message {
+  font-family: "Georgia", serif;
+  font-size: 0.9rem;
+  color: #8b7355;
+  text-align: left;
+  padding: 1rem;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  max-width: 300px;
+  background-color: var(--paper-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.instruction-message kbd {
+  font-family: monospace;
+  background-color: rgba(139, 115, 85, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.9em;
 }

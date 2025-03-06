@@ -22,8 +22,13 @@ const Card = memo(({ article, onDismiss, isTop, ref }: CardProps) => {
       }}
       tabIndex={0}
       onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
+        if (e.key === " ") {
           e.preventDefault();
+          onDismiss?.();
+        }
+        if (e.key === "Enter") {
+          e.preventDefault();
+          window.open(article.url, "_blank");
           onDismiss?.();
         }
       }}

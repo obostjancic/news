@@ -1,5 +1,4 @@
 import { useCallback } from "react";
-import { parseStringPromise } from "xml2js";
 import { useQuery } from "@tanstack/react-query";
 import { useLocalStorage } from "./useLocalStorage";
 import { Article } from "./types";
@@ -7,16 +6,6 @@ import axios from "axios";
 
 const randomInRange = (min: number, max: number) =>
   Math.random() * (max - min) + min;
-
-const getVal = (obj: unknown) => {
-  if (obj && typeof obj === "object") {
-    if ("_" in obj) {
-      return obj["_"] as string;
-    }
-  }
-
-  return obj;
-};
 
 export const useArticles = () => {
   const {
@@ -27,22 +16,9 @@ export const useArticles = () => {
     queryKey: ["articles"],
     queryFn: async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/jobs/6");
+        const response = await axios.get("http://localhost:3000/api/jobs/1");
 
-        const fetchedArticles = response.data;
-
-        // const result = await parseStringPromise(text);
-        // const fetchedArticles: Article[] = result.rss.channel[0].item.map(
-        //   (article: Record<string, unknown[]>) => ({
-        //     id: getVal(article.guid[0]),
-        //     title: getVal(article.title[0]),
-        //     content: getVal(article.description[0]),
-        //     category: getVal(article.category[0]),
-        //     link: getVal(article.link[0]),
-        //   })
-        // );
-
-        return fetchedArticles.results.map(
+        return response.data.results.map(
           (article: { data: Article }, index: number) => ({
             ...article.data,
             card: {
