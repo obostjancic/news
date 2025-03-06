@@ -1,8 +1,9 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
+
 import Card from "./Card";
-import { useArticles } from "./useArticles";
 import LoadingIndicator from "./LoadingIndicator";
+import { useArticles } from "./useArticles";
 
 function App() {
   const queryClient = new QueryClient();

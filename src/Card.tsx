@@ -1,4 +1,5 @@
 import React, { memo } from "react";
+
 import { Article } from "./types";
 
 type CardProps = {
@@ -9,7 +10,6 @@ type CardProps = {
 };
 
 const Card = memo(({ article, onDismiss, isTop, ref }: CardProps) => {
-  console.log("rendering", article.title);
   return (
     <div
       ref={ref}

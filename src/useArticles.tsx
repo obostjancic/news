@@ -1,8 +1,10 @@
-import { useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useLocalStorage } from "./useLocalStorage";
-import { Article } from "./types";
 import axios from "axios";
+import { useCallback } from "react";
+
+import { Article } from "./types";
+import { useLocalStorage } from "./useLocalStorage";
+
 
 const randomInRange = (min: number, max: number) =>
   Math.random() * (max - min) + min;
