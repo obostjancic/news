@@ -1,0 +1,173 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Merriweather:wght@300;400;700&display=swap");
+
+:root {
+  --background-color: #f1efe1;
+  --paper-color: #f9f7f1;
+
+  --text-color: #2c2c2c;
+  --headline-color: #000;
+  --border-color: #8b8b8b;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: "Merriweather", serif;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-image: linear-gradient(
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.newspaper-container {
+  background-color: var(--background-color);
+  padding: 30px;
+}
+
+.article-stack {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+  height: 600px;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.article-card {
+  position: absolute;
+  width: 350px;
+  background-color: var(--paper-color);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px var(--card-shadow), 0 5px 10px var(--card-shadow);
+  padding: 25px;
+  transition: all 0.3s ease-in-out, transform 0.3s ease-in-out,
+    opacity 0.2s ease-in-out, scale 0.3s ease-in-out;
+  transform-origin: center;
+  cursor: pointer;
+  opacity: 0.9;
+  scale: 1;
+}
+
+.background-card {
+  cursor: default;
+  opacity: 1;
+  scale: 0.9;
+}
+
+.top-card {
+  cursor: pointer;
+  opacity: 1;
+  scale: 1;
+}
+
+.top-card:hover {
+  /* transform: translateY(-20px) !important; */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15), 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.top-card:focus {
+  outline: 1px solid rgba(0, 0, 0, 0.1);
+  outline-offset: 1px;
+}
+
+.article-card-dismissed {
+  opacity: 0;
+  scale: 0.8;
+  transform: translateY(50px) !important;
+}
+
+.article-card button {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.article-card-title {
+  font-family: "Libre Baskerville", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--headline-color);
+  margin-bottom: 10px;
+}
+
+.article-card-byline {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 10px;
+}
+
+.article-card-content {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-color);
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .article-card {
+    width: 90%;
+    max-width: 350px;
+  }
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Full viewport height */
+  font-size: 1.5rem; /* Adjust font size as needed */
+  color: #333; /* Loading text color */
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-card {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: var(--paper-color);
+  position: absolute;
+}
+
+.loading-cards {
+  width: 64px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+.article-card-category {
+  font-size: 0.9rem; /* Adjust size as needed */
+  color: #666; /* Category text color */
+  margin: 4px 0; /* Spacing */
+}
