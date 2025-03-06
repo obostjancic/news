@@ -18,9 +18,13 @@ export const useArticles = () => {
     queryKey: ["articles"],
     queryFn: async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/jobs/1");
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/jobs/1`
+        );
 
-        return response.data.results.map(
+        const fetchedArticles = response.data;
+
+        return fetchedArticles.results.map(
           (article: { data: Article }, index: number) => ({
             ...article.data,
             card: {
