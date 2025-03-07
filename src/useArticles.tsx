@@ -5,7 +5,6 @@ import { useCallback } from "react";
 import { Article } from "./types";
 import { useLocalStorage } from "./useLocalStorage";
 
-
 const randomInRange = (min: number, max: number) =>
   Math.random() * (max - min) + min;
 
@@ -22,7 +21,7 @@ export const useArticles = () => {
           `${import.meta.env.VITE_API_URL}/api/jobs/1`
         );
 
-        const fetchedArticles = response.data;
+        const fetchedArticles = response.data.slice().reverse().slice(0, 50);
 
         return fetchedArticles.results.map(
           (article: { data: Article }, index: number) => ({
