@@ -21,9 +21,12 @@ export const useArticles = () => {
           `${import.meta.env.VITE_API_URL}/api/jobs/1`
         );
 
-        const fetchedArticles = response.data.slice().reverse().slice(0, 50);
+        const fetchedArticles = response.data.results
+          .slice()
+          .reverse()
+          .slice(0, 50);
 
-        return fetchedArticles.results.map(
+        return fetchedArticles.map(
           (article: { data: Article }, index: number) => ({
             ...article.data,
             card: {
