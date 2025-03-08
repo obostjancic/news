@@ -5,22 +5,22 @@ import TimeAgo from "react-timeago";
 
 type CardProps = {
   article: Article;
-  onDismiss: (() => void) | null;
-  onUndoDismiss: (() => void) | null;
+  onMarkRead: (() => void) | null;
+  onMarkUnread: (() => void) | null;
   isTop: boolean;
   ref: React.RefObject<HTMLDivElement | null> | null;
 };
 
 const Card = memo(
-  ({ article, onDismiss, onUndoDismiss, isTop, ref }: CardProps) => {
+  ({ article, onMarkRead, onMarkUnread, isTop, ref }: CardProps) => {
     const openArticle = useCallback(() => {
       window.open(article.url, "_blank");
-      onDismiss?.();
-    }, [article.url, onDismiss]);
+      onMarkRead?.();
+    }, [article.url, onMarkRead]);
 
-    const dismissArticle = useCallback(() => {
-      onDismiss?.();
-    }, [onDismiss]);
+    const markRead = useCallback(() => {
+      onMarkRead?.();
+    }, [onMarkRead]);
 
     return (
       <div
@@ -36,7 +36,7 @@ const Card = memo(
         onKeyDown={(e) => {
           if (e.key === " ") {
             e.preventDefault();
-            dismissArticle();
+            markRead();
           }
           if (e.key === "Enter") {
             e.preventDefault();
@@ -44,7 +44,7 @@ const Card = memo(
           }
           if (e.key === "Backspace") {
             e.preventDefault();
-            onUndoDismiss?.();
+            onMarkUnread?.();
           }
         }}
       >
@@ -57,7 +57,7 @@ const Card = memo(
           <div className="action-buttons">
             <button
               className="action-button"
-              onClick={dismissArticle}
+              onClick={markRead}
               title="Skip article"
             >
               Skip

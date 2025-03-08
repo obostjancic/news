@@ -30,8 +30,7 @@ function App() {
 
 function Articles() {
   const topCardRef = useRef<HTMLDivElement>(null);
-  const { articles, loading, error, dismissArticle, undoDismissArticle } =
-    useArticles();
+  const { articles, loading, error, markRead, markUnread } = useArticles();
 
   const topArticleId = articles[0]?.id;
 
@@ -78,8 +77,8 @@ function Articles() {
           article={article}
           key={article.id}
           isTop={index === 0}
-          onDismiss={index === 0 ? () => dismissArticle(article.id) : null}
-          onUndoDismiss={undoDismissArticle}
+          onMarkRead={index === 0 ? () => markRead(article.id) : null}
+          onMarkUnread={markUnread}
           ref={index === 0 ? topCardRef : null}
         />
       ))}

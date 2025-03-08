@@ -48,31 +48,31 @@ export const useArticles = () => {
     },
   });
 
-  const [dismissedArticles, setDismissedArticles] = useLocalStorage<string[]>(
-    "dismissedArticles",
+  const [readArticles, setReadArticles] = useLocalStorage<string[]>(
+    "readArticles",
     []
   );
 
-  const dismissArticle = useCallback(
+  const markRead = useCallback(
     (idToRemove: string) => {
-      setDismissedArticles((prevArticles) => [...prevArticles, idToRemove]);
+      setReadArticles((prevArticles) => [...prevArticles, idToRemove]);
     },
-    [setDismissedArticles]
+    [setReadArticles]
   );
 
-  const undoDismissArticle = useCallback(() => {
-    setDismissedArticles((prevArticles) => prevArticles.slice(0, -1));
-  }, [setDismissedArticles]);
+  const markUnread = useCallback(() => {
+    setReadArticles((prevArticles) => prevArticles.slice(0, -1));
+  }, [setReadArticles]);
 
   const articles = allArticles.filter(
-    (article) => !dismissedArticles.includes(article.id)
+    (article) => !readArticles.includes(article.id)
   );
 
   return {
     articles,
     loading,
     error,
-    dismissArticle,
-    undoDismissArticle,
+    markRead,
+    markUnread,
   };
 };
