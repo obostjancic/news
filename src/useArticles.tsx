@@ -60,6 +60,10 @@ export const useArticles = () => {
     [setDismissedArticles]
   );
 
+  const undoDismissArticle = useCallback(() => {
+    setDismissedArticles((prevArticles) => prevArticles.slice(0, -1));
+  }, [setDismissedArticles]);
+
   const articles = allArticles.filter(
     (article) => !dismissedArticles.includes(article.id)
   );
@@ -69,5 +73,6 @@ export const useArticles = () => {
     loading,
     error,
     dismissArticle,
+    undoDismissArticle,
   };
 };

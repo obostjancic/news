@@ -5,8 +5,6 @@ import Card from "./Card";
 import LoadingIndicator from "./LoadingIndicator";
 import { useArticles } from "./useArticles";
 
-
-
 function App() {
   const queryClient = new QueryClient();
 
@@ -15,9 +13,15 @@ function App() {
       <div className="newspaper-container">
         <Articles />
         <div className="instruction-message">
-          Press <kbd>Space</kbd> to dismiss an article
-          <br />
-          Press <kbd>Enter</kbd> to read the source article
+          <div className="keyboard-instructions">
+            <strong>Keyboard:</strong>
+            <br />
+            Press <kbd>Space</kbd> to skip an article
+            <br />
+            Press <kbd>Backspace</kbd> to undo
+            <br />
+            Press <kbd>Enter</kbd> to read
+          </div>
         </div>
       </div>
     </QueryClientProvider>
@@ -26,7 +30,8 @@ function App() {
 
 function Articles() {
   const topCardRef = useRef<HTMLDivElement>(null);
-  const { articles, loading, error, dismissArticle } = useArticles();
+  const { articles, loading, error, dismissArticle, undoDismissArticle } =
+    useArticles();
 
   const topArticleId = articles[0]?.id;
 
@@ -74,6 +79,7 @@ function Articles() {
           key={article.id}
           isTop={index === 0}
           onDismiss={index === 0 ? () => dismissArticle(article.id) : null}
+          onUndoDismiss={undoDismissArticle}
           ref={index === 0 ? topCardRef : null}
         />
       ))}
