@@ -18,13 +18,15 @@ export const useArticles = () => {
     queryFn: async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/api/jobs/1`
+          `${import.meta.env.VITE_API_URL}/api/public/results`,
+          {
+            headers: {
+              "X-API-Key": import.meta.env.VITE_API_KEY,
+            },
+          }
         );
 
-        const fetchedArticles = response.data.results
-          .slice()
-          .reverse()
-          .slice(0, 50);
+        const fetchedArticles = response.data[0].slice().reverse().slice(0, 50);
 
         return fetchedArticles.map(
           (article: { data: Article }, index: number) => ({

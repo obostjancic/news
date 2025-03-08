@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 
 import { Article } from "./types";
+import TimeAgo from "react-timeago";
 
 type CardProps = {
   article: Article;
@@ -34,7 +35,9 @@ const Card = memo(({ article, onDismiss, isTop, ref }: CardProps) => {
       }}
     >
       <h2 className="article-card-title">{article.title}</h2>
-      <p className="article-card-byline"></p>
+      <p className="article-card-byline">
+        <TimeAgo date={new Date(article.date)} />
+      </p>
       <div className="article-card-content">{article.text}</div>
       <a
         href={article.url}

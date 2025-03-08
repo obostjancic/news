@@ -3,7 +3,7 @@ export type Article = {
   title: string;
   text: string;
   url: string;
-  dare: string;
+  date: string;
   card: {
     rotation: number;
     initialIndex: number;
