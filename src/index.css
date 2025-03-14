@@ -208,11 +208,6 @@ body {
   font-size: 0.9em;
 }
 
-.keyboard-instructions,
-.touch-instructions {
-  margin-bottom: 10px;
-}
-
 .touch-instructions {
   display: none;
 }
@@ -220,6 +215,10 @@ body {
 /* Show touch instructions and hide keyboard instructions on mobile */
 @media (max-width: 640px) {
   .keyboard-instructions {
+    display: none;
+  }
+
+  .instruction-message {
     display: none;
   }
 

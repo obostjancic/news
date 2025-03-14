@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 
 import { Article } from "./types";
 import { useLocalStorage } from "./useLocalStorage";
+
+const MAX_READ_ARTICLES = 30;
 
 const randomInRange = (min: number, max: number) =>
   Math.random() * (max - min) + min;
@@ -26,7 +28,11 @@ export const useArticles = () => {
           }
         );
 
-        const fetchedArticles = response.data[0].slice().reverse().slice(0, 50);
+        const fetchedArticles = response.data[0]
+          .reverse()
+          .slice(0, MAX_READ_ARTICLES * 2)
+          .sort((a: Article, b: Article) => b.date < a.date)
+          .slice(0, MAX_READ_ARTICLES);
 
         return fetchedArticles.map(
           (article: { data: Article }, index: number) => ({
@@ -52,6 +58,12 @@ export const useArticles = () => {
     "readArticles",
     []
   );
+
+  useEffect(() => {
+    if (readArticles.length > MAX_READ_ARTICLES) {
+      setReadArticles(readArticles.slice(-MAX_READ_ARTICLES));
+    }
+  }, [readArticles, setReadArticles]);
 
   const markRead = useCallback(
     (idToRemove: string) => {
