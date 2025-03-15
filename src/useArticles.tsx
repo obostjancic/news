@@ -29,8 +29,6 @@ export const useArticles = () => {
         );
 
         const fetchedArticles = response.data[0]
-          .reverse()
-          .slice(0, MAX_READ_ARTICLES * 2)
           .sort((a: Article, b: Article) => b.date < a.date)
           .slice(0, MAX_READ_ARTICLES);
 
