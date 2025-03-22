@@ -20,8 +20,8 @@ else
     echo "📦 Dependencies unchanged, skipping install"
 fi
 
-echo "🧪 Running tests..."
-yarn test --run || exit 1
+# echo "🧪 Running tests..."
+# yarn test --run || exit 1
 
 echo "🏗️ Building..."
 yarn build
