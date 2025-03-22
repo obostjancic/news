@@ -222,7 +222,7 @@ body {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   opacity: var(--opacity-default);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 .instruction-message kbd {
