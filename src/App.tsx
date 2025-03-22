@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 import Card from "./Card";
 import { useArticles } from "./hooks/useArticles";
@@ -62,10 +62,17 @@ type ArticlesProps = {
   articles: Article[];
   markRead: (id: string) => void;
   markUnread: () => void;
+  onClearAll: () => void;
 };
 
-function Articles({ articles, markRead, markUnread }: ArticlesProps) {
+function Articles({
+  articles,
+  markRead,
+  markUnread,
+  onClearAll,
+}: ArticlesProps) {
   const topCardRef = useRef<HTMLDivElement>(null);
+  const [isClearing, setIsClearing] = useState(false);
   const topArticleId = articles[0]?.id;
 
   useEffect(() => {
@@ -88,6 +95,15 @@ function Articles({ articles, markRead, markUnread }: ArticlesProps) {
     };
   }, [topCardRef]);
 
+  const handleClearAll = useCallback(() => {
+    setIsClearing(true);
+    setTimeout(() => {
+      onClearAll();
+    }, 300);
+  }, [onClearAll]);
+
+  useKeyPress("Escape", handleClearAll);
+
   if (!articles.length) {
     return (
       <div className="placeholder-message">
@@ -97,7 +113,7 @@ function Articles({ articles, markRead, markUnread }: ArticlesProps) {
   }
 
   return (
-    <div className="article-stack">
+    <div className={`article-stack ${isClearing ? "clearing" : ""}`}>
       {articles.map((article, index) => (
         <Card
           article={article}
@@ -123,7 +139,6 @@ function AppContent() {
     markAllUnread,
   } = useArticles();
 
-  useKeyPress("Escape", markAllRead);
   useKeyPress("Backspace", markAllUnread);
 
   if (loading) {
@@ -140,6 +155,7 @@ function AppContent() {
         articles={articles}
         markRead={markRead}
         markUnread={markUnread}
+        onClearAll={markAllRead}
       />
       <KeyboardInstructions />
       <MobileActions
