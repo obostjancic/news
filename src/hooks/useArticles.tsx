@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useCallback, useEffect } from "react";
 
-import { Article } from "./types";
+import { Article } from "../types";
+
 import { useLocalStorage } from "./useLocalStorage";
 
 const MAX_READ_ARTICLES = 30;
@@ -70,8 +71,16 @@ export const useArticles = () => {
     [setReadArticles]
   );
 
+  const markAllRead = useCallback(() => {
+    setReadArticles(allArticles.map((article) => article.id));
+  }, [allArticles, setReadArticles]);
+
   const markUnread = useCallback(() => {
     setReadArticles((prevArticles) => prevArticles.slice(0, -1));
+  }, [setReadArticles]);
+
+  const markAllUnread = useCallback(() => {
+    setReadArticles([]);
   }, [setReadArticles]);
 
   const articles = allArticles.filter(
@@ -84,5 +93,7 @@ export const useArticles = () => {
     error,
     markRead,
     markUnread,
+    markAllRead,
+    markAllUnread,
   };
 };

@@ -1,7 +1,8 @@
 import React, { memo, useCallback } from "react";
-
-import { Article } from "./types";
 import TimeAgo from "react-timeago";
+
+import { useKeyPress } from "./hooks/useKeyPress";
+import { Article } from "./types";
 
 type CardProps = {
   article: Article;
@@ -22,6 +23,10 @@ const Card = memo(
       onMarkRead?.();
     }, [onMarkRead]);
 
+    useKeyPress(" ", markRead);
+    useKeyPress("Enter", openArticle);
+    useKeyPress("u", () => onMarkUnread?.());
+
     return (
       <div
         ref={ref}
@@ -33,20 +38,6 @@ const Card = memo(
           zIndex: 100 - article.card.initialIndex,
         }}
         tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === " ") {
-            e.preventDefault();
-            markRead();
-          }
-          if (e.key === "Enter") {
-            e.preventDefault();
-            openArticle();
-          }
-          if (e.key === "Backspace") {
-            e.preventDefault();
-            onMarkUnread?.();
-          }
-        }}
       >
         <h2 className="article-card-title">{article.title}</h2>
         <p className="article-card-byline">
