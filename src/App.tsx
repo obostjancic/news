@@ -50,7 +50,7 @@ function KeyboardInstructions() {
         <br />
         Press <kbd>Enter</kbd> to read
         <br />
-        Press <kbd>Backspace</kbd> to bring all articles back
+        Press <kbd>Backspace</kbd> to see old articles
         <br />
         Press <kbd>Escape</kbd> to clear all articles
       </div>
