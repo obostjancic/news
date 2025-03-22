@@ -32,7 +32,7 @@ function MobileActions({
         onClick={articles.length ? markAllRead : markAllUnread}
         className="mobile-action-button"
       >
-        {articles.length ? "Clear All" : "Bring All Back"}
+        {articles.length ? "Clear All" : "See old articles"}
       </button>
     </div>
   );
