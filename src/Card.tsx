@@ -51,7 +51,7 @@ const Card = memo(
 
     useKeyPress(" ", markRead);
     useKeyPress("Enter", openArticle);
-    useKeyPress("u", () => onMarkUnread?.());
+    useKeyPress("Backspace", () => onMarkUnread?.());
 
     const style = {
       transform: `translate(${article.card.offset.x}px, ${

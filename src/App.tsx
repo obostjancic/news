@@ -46,11 +46,11 @@ function KeyboardInstructions() {
         <br />
         Press <kbd>Space</kbd> to skip an article
         <br />
-        Press <kbd>u</kbd> to undo
+        Press <kbd>Backspace</kbd> to undo
         <br />
         Press <kbd>Enter</kbd> to read
         <br />
-        Press <kbd>Backspace</kbd> to see old articles
+        Press <kbd>r</kbd> to see old articles
         <br />
         Press <kbd>Escape</kbd> to clear all articles
       </div>
@@ -139,7 +139,7 @@ function AppContent() {
     markAllUnread,
   } = useArticles();
 
-  useKeyPress("Backspace", markAllUnread);
+  useKeyPress("r", markAllUnread);
 
   if (loading) {
     return <LoadingIndicator />;
