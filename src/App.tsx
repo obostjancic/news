@@ -99,6 +99,7 @@ function Articles({
     setIsClearing(true);
     setTimeout(() => {
       onClearAll();
+      setIsClearing(false);
     }, 300);
   }, [onClearAll]);
 
