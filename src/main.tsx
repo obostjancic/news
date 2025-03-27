@@ -1,4 +1,3 @@
-import HyperDX from "@hyperdx/browser";
 import * as Sentry from "@sentry/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
@@ -14,17 +13,6 @@ Sentry.init({
     /^https:\/\/news\.ognjenbostjancic\.com/,
   ],
   tracesSampleRate: 1.0,
-});
-
-HyperDX.init({
-  apiKey: import.meta.env.VITE_HYPERDX_API_KEY,
-  service: "news",
-  tracePropagationTargets: [
-    "localhost",
-    /^https:\/\/news\.ognjenbostjancic\.com/,
-  ],
-  consoleCapture: true,
-  advancedNetworkCapture: true,
 });
 
 createRoot(document.getElementById("root")!).render(
