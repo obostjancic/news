@@ -3,9 +3,9 @@ import axios from "axios";
 import { useCallback, useEffect } from "react";
 
 import { Article } from "../types";
+import { failRandomly } from "../utils/chaos";
 
 import { useLocalStorage } from "./useLocalStorage";
-import { failRandomly } from "../utils/chaos";
 
 const MAX_READ_ARTICLES = 30;
 
