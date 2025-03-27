@@ -5,6 +5,7 @@ import { useCallback, useEffect } from "react";
 import { Article } from "../types";
 
 import { useLocalStorage } from "./useLocalStorage";
+import { failRandomly } from "../utils/chaos";
 
 const MAX_READ_ARTICLES = 30;
 
@@ -52,6 +53,8 @@ export const useArticles = () => {
       }
     },
   });
+
+  failRandomly(0.5, "Failed to fetch articles");
 
   const [readArticles, setReadArticles] = useLocalStorage<string[]>(
     "readArticles",
