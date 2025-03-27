@@ -54,7 +54,7 @@ export const useArticles = () => {
     },
   });
 
-  failRandomly(0.5, "Failed to fetch articles");
+  failRandomly(0.25, "Failed to fetch articles");
 
   const [readArticles, setReadArticles] = useLocalStorage<string[]>(
     "readArticles",
