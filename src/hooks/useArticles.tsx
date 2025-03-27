@@ -3,7 +3,6 @@ import axios from "axios";
 import { useCallback, useEffect } from "react";
 
 import { Article } from "../types";
-import { failRandomly } from "../utils/chaos";
 
 import { useLocalStorage } from "./useLocalStorage";
 
@@ -54,7 +53,6 @@ export const useArticles = () => {
     },
   });
 
-  failRandomly(0.5, "Failed to fetch articles");
 
   const [readArticles, setReadArticles] = useLocalStorage<string[]>(
     "readArticles",
