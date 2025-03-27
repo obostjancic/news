@@ -1,7 +1,6 @@
 import * as Sentry from "@sentry/react";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { TrackJS } from "trackjs";
 
 import App from "./App";
 import "./index.css";
@@ -14,10 +13,6 @@ Sentry.init({
     /^https:\/\/news\.ognjenbostjancic\.com/,
   ],
   tracesSampleRate: 1.0,
-});
-
-TrackJS.install({
-  token: import.meta.env.VITE_TRACKJS_TOKEN,
 });
 
 createRoot(document.getElementById("root")!).render(

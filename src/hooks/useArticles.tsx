@@ -3,7 +3,6 @@ import axios from "axios";
 import { useCallback, useEffect } from "react";
 
 import { Article } from "../types";
-import { failRandomly } from "../utils/chaos";
 
 import { useLocalStorage } from "./useLocalStorage";
 
@@ -63,30 +62,25 @@ export const useArticles = () => {
     if (readArticles.length > MAX_READ_ARTICLES) {
       setReadArticles(readArticles.slice(-MAX_READ_ARTICLES));
     }
-    failRandomly(0.5, "Random failure: Failed to setReadArticles");
   }, [readArticles, setReadArticles]);
 
   const markRead = useCallback(
     (idToRemove: string) => {
       setReadArticles((prevArticles) => [...prevArticles, idToRemove]);
-      failRandomly(0.5, "Random failure: Failed to markRead");
     },
     [setReadArticles]
   );
 
   const markAllRead = useCallback(() => {
     setReadArticles(allArticles.map((article) => article.id));
-    failRandomly(0.5, "Random failure: Failed to markAllRead");
   }, [allArticles, setReadArticles]);
 
   const markUnread = useCallback(() => {
     setReadArticles((prevArticles) => prevArticles.slice(0, -1));
-    failRandomly(0.5, "Random failure: Failed to markUnread");
   }, [setReadArticles]);
 
   const markAllUnread = useCallback(() => {
     setReadArticles([]);
-    failRandomly(0.5, "Random failure: Failed to markAllUnread");
   }, [setReadArticles]);
 
   const articles = allArticles.filter(
