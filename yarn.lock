@@ -417,11 +417,6 @@
     "@eslint/core" "^0.12.0"
     levn "^0.4.1"
 
-"@highlight-run/react@^16.0.0":
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/@highlight-run/react/-/react-16.0.0.tgz#4e8e31865155f695ae248497450d80f319151822"
-  integrity sha512-BQEPjtCnayHAE3VchQdqoSj2ZDF881pE+GhTqwKywiv6RiLTdr6ic4YzLlMBYhlqG969W1NwPpItnoYMULo2lw==
-
 "@humanfs/core@^0.19.1":
   version "0.19.1"
   resolved "https://registry.yarnpkg.com/@humanfs/core/-/core-0.19.1.tgz#17c55ca7d426733fe3c561906b8173c336b40a77"
@@ -2210,11 +2205,6 @@ hasown@^2.0.2:
   integrity sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==
   dependencies:
     function-bind "^1.1.2"
-
-highlight.run@^9.15.0:
-  version "9.15.0"
-  resolved "https://registry.yarnpkg.com/highlight.run/-/highlight.run-9.15.0.tgz#050109e78c63d241728b1c1f12c5fc2f652fb72e"
-  integrity sha512-BXpksT8ZPz+9bK8rcVsW0K6u5R/r/fyJwz+whNUeI8hA2sPghvM3gCvbI2a5UwVcNk2OKfBhOpVTD5pLupAOGw==
 
 hoist-non-react-statics@^3.3.2:
   version "3.3.2"
