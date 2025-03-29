@@ -368,11 +368,6 @@ body {
   pointer-events: none;
 }
 
-.article-card.becoming-top {
-  animation: becomeTop var(--transition-duration) ease-out forwards;
-}
-
-/* Article stack animations */
 @keyframes stackClear {
   0% {
     transform: scale(1);
