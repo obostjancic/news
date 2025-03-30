@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import posthog from "posthog-js";
 import { useCallback, useEffect } from "react";
 
 import { Article } from "../types";
+import { failRandomly } from "../utils/chaos";
 
 import { useLocalStorage } from "./useLocalStorage";
-import { failRandomly } from "../utils/chaos";
-import posthog from "posthog-js";
 
 const MAX_READ_ARTICLES = 30;
 
