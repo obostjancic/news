@@ -14,7 +14,16 @@ export default defineConfig({
 
   build: {
     minify: "terser",
-    sourcemap: true,
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+      mangle: true,
+      format: {
+        comments: false,
+      },
+    },
     chunkSizeWarningLimit: 1000,
   },
 });
