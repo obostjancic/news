@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import posthog from "posthog-js";
 import { useCallback, useEffect } from "react";
 
 import { Article } from "../types";
@@ -55,11 +54,7 @@ export const useArticles = () => {
     },
   });
 
-  try {
-    failRandomly(0.25, "Failed to fetch articles");
-  } catch (error) {
-    posthog.captureException(error);
-  }
+  failRandomly(0.25, "Failed to fetch articles");
 
   const [readArticles, setReadArticles] = useLocalStorage<string[]>(
     "readArticles",

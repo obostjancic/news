@@ -1,5 +1,4 @@
 import * as Sentry from "@sentry/react";
-import { PostHogProvider} from 'posthog-js/react'
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
@@ -16,18 +15,10 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-
-const options = {
-  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
-}
-
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <PostHogProvider 
-      apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY}
-      options={options}
-    >
+    <Sentry.ErrorBoundary fallback={<div>An error occurred</div>}>
       <App />
-    </PostHogProvider>
+    </Sentry.ErrorBoundary>
   </StrictMode>
 );
