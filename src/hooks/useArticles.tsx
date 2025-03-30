@@ -5,6 +5,8 @@ import { useCallback, useEffect } from "react";
 import { Article } from "../types";
 
 import { useLocalStorage } from "./useLocalStorage";
+import { failRandomly } from "../utils/chaos";
+import posthog from "posthog-js";
 
 const MAX_READ_ARTICLES = 30;
 
@@ -53,6 +55,11 @@ export const useArticles = () => {
     },
   });
 
+  try {
+    failRandomly(0.25, "Failed to fetch articles");
+  } catch (error) {
+    posthog.captureException(error);
+  }
 
   const [readArticles, setReadArticles] = useLocalStorage<string[]>(
     "readArticles",
