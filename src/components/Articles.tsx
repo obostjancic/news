@@ -70,7 +70,6 @@ export function Articles({
           onMarkRead={index === 0 ? () => markRead(article.id) : null}
           onMarkUnread={index === 0 ? markUnread : null}
           ref={index === 0 ? topCardRef : null}
-          index={index}
         />
       ))}
     </div>
