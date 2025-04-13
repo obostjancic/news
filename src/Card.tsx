@@ -1,7 +1,6 @@
-import React, { memo, useCallback, useState, useRef, useEffect } from "react";
+import React, { memo, useCallback, useState } from "react";
 import TimeAgo from "react-timeago";
 
-import { ANIMATION_DURATION } from "./constants";
 import { useKeyPress } from "./hooks/useKeyPress";
 import { Article } from "./types";
 
@@ -11,7 +10,6 @@ type CardProps = {
   onMarkUnread: (() => void) | null;
   isTop: boolean;
   ref: React.RefObject<HTMLDivElement | null> | null;
-  index: number;
 };
 
 const getRandomDirection = () => {
@@ -34,7 +32,6 @@ const Card = memo(
       y: number;
       rotation: number;
     } | null>(null);
-    const timeoutRef = useRef<number>(0);
 
     const openArticle = useCallback(() => {
       window.open(article.url, "_blank");
@@ -46,20 +43,11 @@ const Card = memo(
         setSlideDirection(getRandomDirection());
         setIsRead(true);
         // Delay the actual markRead call until after the animation
-        timeoutRef.current = window.setTimeout(() => {
+        setTimeout(() => {
           onMarkRead?.();
-        }, ANIMATION_DURATION);
+        }, 300);
       }
     }, [isTop, onMarkRead]);
-
-    // Cleanup timeout on unmount or when isTop changes
-    useEffect(() => {
-      return () => {
-        if (timeoutRef.current) {
-          window.clearTimeout(timeoutRef.current);
-        }
-      };
-    }, [isTop]);
 
     useKeyPress(" ", markRead);
     useKeyPress("Enter", openArticle);
@@ -70,7 +58,6 @@ const Card = memo(
         article.card.offset.y
       }px) rotate(${isTop ? 0 : article.card.rotation}deg)`,
       zIndex: 100 - article.card.initialIndex,
-      "--initial-rotation": `${article.card.rotation}deg`,
       ...(slideDirection &&
         ({
           "--slide-x": `${slideDirection.x}px`,
@@ -111,18 +98,6 @@ const Card = memo(
           </div>
         )}
       </div>
-    );
-  },
-  (prevProps, nextProps) => {
-    // Only re-render if:
-    // 1. The card becomes top or stops being top
-    // 2. The article data changes
-    // 3. The callbacks change
-    return (
-      prevProps.isTop === nextProps.isTop &&
-      prevProps.article === nextProps.article &&
-      prevProps.onMarkRead === nextProps.onMarkRead &&
-      prevProps.onMarkUnread === nextProps.onMarkUnread
     );
   }
 );

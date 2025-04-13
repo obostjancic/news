@@ -40,9 +40,8 @@
   --opacity-disabled: 0.9;
 
   /* Transitions */
-  --transition-duration: 0.3s;
   --transition-fast: all 0.05s ease;
-  --transition-normal: all var(--transition-duration) ease-in-out;
+  --transition-normal: all 0.3s ease-in-out;
 }
 
 body {
@@ -81,7 +80,6 @@ body {
   padding: var(--spacing-xxl) 0;
   overflow: hidden;
   flex-direction: column;
-  perspective: 1000px;
 }
 
 .article-card {
@@ -91,31 +89,24 @@ body {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg), var(--shadow-md);
   padding: var(--spacing-xl);
-  transition: all var(--transition-duration) ease-out;
+  transition: var(--transition-normal);
   transform-origin: center;
   cursor: pointer;
   opacity: var(--opacity-disabled);
-  transform: translateY(0) scale(0.9) rotate(var(--initial-rotation));
-  will-change: transform, opacity;
-  backface-visibility: hidden;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
-  touch-action: manipulation;
+  scale: 1;
   color: var(--text-color);
 }
 
 .background-card {
   cursor: default;
   opacity: var(--opacity-hover);
-  transform: translateY(0) scale(0.9) rotate(var(--initial-rotation));
+  scale: 0.9;
 }
 
 .top-card {
   cursor: pointer;
   opacity: var(--opacity-hover);
-  transform: translateY(0) scale(1) rotate(0deg);
+  scale: 1;
 }
 
 .top-card:hover {
@@ -343,31 +334,22 @@ body {
 /* Article card animations */
 @keyframes slideOut {
   0% {
-    transform: translateY(0) scale(1) rotate(0deg);
+    transform: translate(0, 0) rotate(0deg);
     opacity: 1;
   }
   100% {
-    transform: translate(var(--slide-x), var(--slide-y)) rotate(var(--slide-rotation));
+    transform: translate(var(--slide-x), var(--slide-y))
+      rotate(var(--slide-rotation));
     opacity: 0;
   }
 }
 
-@keyframes becomeTop {
-  0% {
-    transform: translate(0, 0) rotate(var(--initial-rotation)) scale(0.9);
-    opacity: var(--opacity-disabled);
-  }
-  100% {
-    transform: translate(0, 0) rotate(0deg) scale(1);
-    opacity: var(--opacity-hover);
-  }
-}
-
 .article-card.read {
-  animation: slideOut var(--transition-duration) ease-out forwards;
+  animation: slideOut 0.3s ease-out forwards;
   pointer-events: none;
 }
 
+/* Article stack animations */
 @keyframes stackClear {
   0% {
     transform: scale(1);
@@ -380,6 +362,6 @@ body {
 }
 
 .article-stack.clearing {
-  animation: stackClear var(--transition-duration) ease-out forwards;
+  animation: stackClear 0.3s ease-out forwards;
   pointer-events: none;
 }
